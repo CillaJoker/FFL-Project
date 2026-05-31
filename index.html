@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FFL Start/Sit Advisor</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header>
+  <h1>FFL Start/Sit Advisor</h1>
+  <span>Powered by Sleeper + Groq</span>
+  <button class="btn-back hidden" id="btn-back">&#8592; Settings</button>
+</header>
+
+<main>
+
+  <!-- Settings View -->
+  <div id="view-settings" class="view">
+    <div class="settings-card">
+      <h2>Setup</h2>
+
+      <div class="field">
+        <label>Sleeper Username</label>
+        <input id="inp-username" type="text" placeholder="your_sleeper_username" autocomplete="off" />
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Season</label>
+          <input id="inp-season" type="number" value="2025" min="2020" max="2030" />
+        </div>
+        <div class="field">
+          <label>Week</label>
+          <input id="inp-week" type="number" value="1" min="1" max="18" />
+        </div>
+      </div>
+
+      <button class="btn btn-secondary" id="btn-load-leagues" style="margin-bottom:10px">Load My Leagues</button>
+
+      <div id="league-row" class="field hidden">
+        <label>League</label>
+        <select id="sel-league">
+          <option value="">-- Select a league --</option>
+        </select>
+      </div>
+
+      <div id="analyze-row" class="hidden">
+        <button class="btn btn-primary" id="btn-analyze">Analyze My Roster</button>
+      </div>
+
+      <div id="status" class="status hidden"></div>
+
+    </div>
+  </div>
+
+  <!-- Loading View -->
+  <div id="view-loading" class="view hidden">
+    <div class="spinner"></div>
+    <p id="loading-msg">Loading...</p>
+  </div>
+
+  <!-- Dashboard View -->
+  <div id="view-dashboard" class="view hidden">
+    <div id="position-groups"></div>
+  </div>
+
+</main>
+
+<!-- Load order matters: config first, then API clients, then scorer, then app -->
+<script src="config.js"></script>
+<script src="api/sleeper.js"></script>
+<script src="api/nfl.js"></script>
+<script src="api/groq.js"></script>
+<script src="scorer.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
